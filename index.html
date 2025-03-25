@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chromafall</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            overflow: hidden;
+        }
+        
+        .glitch-text {
+            font-size: 2rem;
+            text-shadow: 2px 2px red, -2px -2px blue;
+            animation: glitch 1.5s infinite alternate;
+        }
+        
+        @keyframes glitch {
+            0% { transform: translate(1px, 1px); }
+            100% { transform: translate(-1px, -1px); }
+        }
+
+        @keyframes flicker {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
+        }
+        
+        .flicker {
+            animation: flicker 2s infinite;
+        }
+
+        .hidden-link {
+            width: 50px;
+            height: 50px;
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            cursor: pointer;
+        }
+
+        .hidden-page {
+            display: none;
+        }
+
+        #glitched-image {
+            width: 200px;
+            height: auto;
+            opacity: 0.5;
+            filter: contrast(200%) brightness(50%);
+            position: absolute;
+            top: 10%;
+            left: 5%;
+        }
+
+        .error-message {
+            font-size: 1.2rem;
+            color: red;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="glitch-text">Do you remember the colors?</h1>
+
+    <img id="glitched-image" src="assets/image1.png" alt="Glitched image">
+    
+    <div class="hidden-link" onclick="revealHiddenPage()"></div>
+
+    <div id="hidden-content" class="hidden-page">
+        <p class="flicker">U28gdGhleSB3ZXJlIHJpZ2h0Li4gYnV0IHRob3NlIHdpdGggY29sb3JzIHdvdWxkIGJlIGRlc3Ryb3llZC4uLg==</p>
+    </div>
+
+    <div id="painter-page" class="hidden-page">
+        <h2 class="flicker">The Painter</h2>
+        <p>The Painter was here. But now, all that remains is silence.</p>
+        <img src="assets/image2.jpg" alt="Glitched image">
+    </div>
+
+    <div id="password-page" class="hidden-page">
+        <h2>ENTER PASSWORD</h2>
+        <input type="text" id="password">
+        <button onclick="checkPassword()">Submit</button>
+    </div>
+
+    <div id="secret-text" class="hidden-page">
+        <p>If you have found this, you are closer than you think.</p>
+        <p>Send an email to: [REDACTED]@gmail.com</p>
+        <p>But be warned: Not all who seek answers find them.</p>
+    </div>
+
+    <div id="error-page" class="hidden-page">
+        <p class="error-message">Error 404: Page Not Found</p>
+        <p class="flicker">Wait... this wasn't supposed to be here.</p>
+        <p>There is something underneath...</p>
+    </div>
+
+    <audio id="creepy-audio" loop>
+        <source src="assets/audio1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function revealHiddenPage() {
+            document.getElementById("hidden-content").style.display = "block";
+            document.getElementById("creepy-audio").play();
+        }
+
+        function checkPassword() {
+            var pass = document.getElementById("password").value;
+            if (pass === "FALLEN") {
+                document.getElementById("secret-text").style.display = "block";
+            } else {
+                alert("Access Denied.");
+            }
+        }
+
+        setTimeout(() => {
+            document.getElementById("error-page").style.display = "block";
+        }, 20000); // Fake error after 20 seconds
+    </script>
+
+</body>
+</html>
